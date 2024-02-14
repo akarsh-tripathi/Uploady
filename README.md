@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<br/>
+<p align="center">
+  <h3 align="center">Uploady (Blinkit)</h3>
+<!-- ![Screen Shot](images/kisaanpro.png) -->
+<img src="./images/kisaanpro.png"/>
 
-## Getting Started
+  <p align="center">
+    A NextJS app to Upload your Files & Share with others. 
+    <br/>
+    <br/>
+    <a href="https://github.com/akarsh-tripathi/Team_KisaanPro">View Demo</a>
+  </p>
+</p>
 
-First, run the development server:
+![Contributors](https://img.shields.io/github/contributors/akarsh-tripathi/Team_KisaanPro?color=dark-green) ![License](https://img.shields.io/github/license/akarsh-tripathi/Team_KisaanPro) 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Table Of Contents
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* [About the Project](#about-the-project)
+* [Built With](#built-with)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## About The Project
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+The Project has been created to implement an Authentication System using JWT with the use of the Postgres Database. I've used Prisma ORM to manage the querying & migrates of the database.
+Uploady support files that can be shared with others using Supabase Storage as Bucket similar to Amazon S3 Buckets. 
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![Screen Shot](images/cover.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Built With
 
-## Deploy on Vercel
+The Software was built on top of 
+* NEXTJS Framework (Server Side rendering)
+* Used Supabase for Postgres Database
+* Used NextAuth + Prisma (ORM) 
+* Postman for API Testing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Screen Shot](images/achivement.jpg)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
