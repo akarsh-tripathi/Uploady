@@ -10,23 +10,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id       String   @id @default(uuid())
-  email    String   @unique
-  name     String?
-  username String   @unique
-  password String
+  id               String   @id @default(uuid())
+  email            String   @unique
+  name             String?
+  username         String   @unique
+  password         String
   UploadedDocument String[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @default(now())
 }
 
-model Document{
-  id String @id @default(uuid())
-  filename String
-  url String
-  userId String
+model Document {
+  id        String   @id @default(uuid())
+  filename  String
+  url       String
+  userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
