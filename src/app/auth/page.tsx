@@ -1,7 +1,7 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-//import { Icons } from "@/components/icons"
+
 import { Button } from "../../components/ui/button";
 import {
   Card,
@@ -27,6 +27,7 @@ import { useForm } from "react-hook-form";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { toast } from "@/components/ui/use-toast";
 
 // {Form Schema Via Zod}
 const signInFormSchema = z.object({
@@ -86,8 +87,17 @@ export function AuthPage() {
     console.log(data);
 
     if (data?.error) {
-      console.log(data.error);
+      toast({
+        variant: "destructive",
+        title: "Login Error",
+        description: "Kindly check your credentials and try again.",
+      })
     } else {
+      toast({
+        variant: "default",
+        title: "Login Successful",
+        description: "Welcome to Dashboard.",
+      })
       router.push("/dashboard");
     }
   }
@@ -109,9 +119,18 @@ export function AuthPage() {
     });
 
     if (response.ok) {
+      toast({
+        variant: "default",
+        title: "SignUp Successful",
+        description: "Welcome to Uploady!",
+      })
       router.push("/dashboard");
     } else {
-      console.log("Error");
+      toast({
+        variant: "destructive",
+        title: "Ooops! Something went wrong",
+        description: "We'll have a look, Try Again!",
+      })
     }
     console.log(value);
   }
@@ -196,35 +215,7 @@ export function AuthPage() {
                 </span>
               </CardContent>
 
-              <CardFooter className="flex flex-col space-y-2">
-                <div className="relative mb-2">
-                  <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t" />
-                  </div>
-                  <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-background px-2 text-muted-foreground">
-                      Or continue with
-                    </span>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-6 m-2">
-                  <Button variant="outline">
-                    {/* <Icons.gitHub className="mr-2 h-4 w-4" /> */}
-                    Github
-                  </Button>
-                  <Button variant="outline">
-                    {/* <Icons.twitter className="mr-2 h-4 w-4" /> */}
-                    Twitter
-                  </Button>
-                </div>
-                <p className="mt-2 text-xs text-center text-gray-700">
-                  {" "}
-                  Already have an account?{" "}
-                  <span className=" text-blue-600 hover:underline">
-                    <Link href="/signup">SignUp</Link>
-                  </span>
-                </p>
-              </CardFooter>
+             
             </Card>
           </div>
         </TabsContent>
@@ -328,39 +319,14 @@ export function AuthPage() {
                   </form>
                 </Form>
               </CardContent>
-              <CardFooter className="flex flex-col space-y-2">
-                <div className="relative mb-2">
-                  <div className="absolute inset-0 flex items-center">
-                    <span className="w-full border-t" />
-                  </div>
-                  <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-background px-2 text-muted-foreground">
-                      Or continue with
-                    </span>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-6 m-2">
-                  <Button variant="outline">
-                    {/* <Icons.gitHub className="mr-2 h-4 w-4" /> */}
-                    Github
-                  </Button>
-                  <Button variant="outline">
-                    {/* <Icons.twitter className="mr-2 h-4 w-4" /> */}
-                    Twitter
-                  </Button>
-                </div>
-                <p className="mt-2 text-xs text-center text-gray-700">
-                  {" "}
-                  Already have an account?{" "}
-                  <span className=" text-blue-600 hover:underline">
-                    <Link href="/sign-in">Sign In</Link>
-                  </span>
-                </p>
-              </CardFooter>
+              
             </Card>
           </div>
         </TabsContent>
       </Tabs>
+      <div className="text-gray">
+        <p>Created By Akarsh Tripathi for Blinkit</p>
+      </div>
     </div>
   );
 }

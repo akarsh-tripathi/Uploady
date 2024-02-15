@@ -3,6 +3,7 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { db } from "./db";
 import bcrypt from "bcrypt";
+import { callbackify } from "util";
 
 
 export const AuthOptions:NextAuthOptions ={
@@ -41,6 +42,30 @@ export const AuthOptions:NextAuthOptions ={
                 email:exsistingUser.email,
             }
             }
-        })
-      ]
+        }),
+    ],
+    callbacks:{
+        async jwt({ token, user}) {
+            if(user){
+                return{
+                    ...token,
+                    username:user.username,
+                }
+            }
+            return token
+        },
+        async session({ session, user, token }) {
+            return {
+                ...session,
+                user:{
+                    ...session.user,
+                    username:token.username,
+                    id:token.id,
+                    emailid:token.email,
+                }
+            }
+        },
+    }
+        
+
 }

@@ -6,13 +6,15 @@ import { useToast } from "../ui/use-toast";
 import { ToastAction } from "../ui/toast";
 import { supabase } from "@/lib/supabase";
 import { Button } from "../ui/button";
+import { useSession } from "next-auth/react";
 
 const dropzone = () => {
-  const handleUpload = async (acceptedFiles: File) => {};
+  
   const { toast } = useToast();
   const maxSize = 1048576;
 
   const onDrop = (acceptedFile: File[]) => {
+    
     acceptedFile.forEach((file) => {
         console.log(file);
       const reader = new FileReader();
@@ -50,7 +52,7 @@ const dropzone = () => {
                 body: JSON.stringify({
                   filename: selectedFile.name,
                   url: data.path,
-                  userId: "string",
+                  userId: 'adojojoiadd',
                 }),
             });
             if(response.ok){
