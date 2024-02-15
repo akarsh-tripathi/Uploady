@@ -2,17 +2,15 @@
 <p align="center">
   <h3 align="center">Uploady (Blinkit)</h3>
 <!-- ![Screen Shot](images/kisaanpro.png) -->
-<img src="./images/kisaanpro.png"/>
+<img src="src/imgsrc/dashboard.jpg"/>
 
   <p align="center">
     A NextJS app to Upload your Files & Share with others. 
     <br/>
-    <br/>
-    <a href="https://github.com/akarsh-tripathi/Team_KisaanPro">View Demo</a>
   </p>
 </p>
 
-![Contributors](https://img.shields.io/github/contributors/akarsh-tripathi/Team_KisaanPro?color=dark-green) ![License](https://img.shields.io/github/license/akarsh-tripathi/Team_KisaanPro) 
+![Contributors](https://img.shields.io/github/contributors/akarsh-tripathi/upload_nextjs?color=dark-green) ![License](https://img.shields.io/github/license/akarsh-tripathi/Team_KisaanPro) 
 
 ## Table Of Contents
 
@@ -26,7 +24,7 @@ The Project has been created to implement an Authentication System using JWT wit
 Uploady support files that can be shared with others using Supabase Storage as Bucket similar to Amazon S3 Buckets. 
 
 
-![Screen Shot](images/cover.png)
+![Screen Shot](src/imgsrc/documentuploaded.jpg)
 
 ## Built With
 
@@ -36,6 +34,7 @@ The Software was built on top of
 * Used NextAuth + Prisma (ORM) 
 * Postman for API Testing
 
-![Screen Shot](images/achivement.jpg)
+![Screen Shot](src/imgsrc/dragndrop.jpg)
+![Screen Shot](src/imgsrc/profile.jpg)
 
 
