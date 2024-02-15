@@ -1,6 +1,5 @@
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
-import { z } from "zod";
 
 
 export async function POST(request: Request){

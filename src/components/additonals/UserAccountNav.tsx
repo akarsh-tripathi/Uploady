@@ -8,7 +8,6 @@ import {
   import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuGroup,
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
@@ -49,7 +48,7 @@ import { signOut, useSession } from "next-auth/react";
             callbackUrl:'/'
         })} >
             Log out
-            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+            <DropdownMenuShortcut>ShiftQ</DropdownMenuShortcut>
         </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

@@ -7,7 +7,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "../../components/ui/card";
@@ -124,7 +123,7 @@ export function AuthPage() {
         title: "SignUp Successful",
         description: "Welcome to Uploady!",
       })
-      router.push("/dashboard");
+      router.push("/");
     } else {
       toast({
         variant: "destructive",

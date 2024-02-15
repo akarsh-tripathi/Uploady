@@ -1,3 +1,4 @@
+'use client';
 import { Metadata } from "next";
 import {
   HoverCard,
@@ -7,45 +8,17 @@ import {
 
 import { Separator } from "../../components/ui/separator";
 import Dropzone from "@/components/additonals/dropzone";
-import { getServerSession } from "next-auth";
-import { AuthOptions } from "@/lib/auth";
-import { redirect } from "next/navigation";
 import { UserNav } from "@/components/additonals/UserAccountNav";
-import { checkAuthentication } from "@/app/serverSession";
 import FileListMap from "@/components/additonals/fileList";
-import { prisma } from "@/lib/db";
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, PromiseLikeOfReactNode, Key, useState, useEffect } from "react";
 
-export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Uploady Dashboard to Upload Files",
-};
-
-// export const getFiles = async () => {
-//   const files = await fetch(process.env.NEXT_LOCALURL+'/api/getDocuments');
-//   const filedata = await files.json();
-//   return {
-//     props:{files:filedata}
-//   }
-// }
+// export const metadata: Metadata = {
+//   title: "Dashboard",
+//   description: "Uploady Dashboard to Upload Files",
+// };
 
 
 export default async function Home() {
-  const val = await checkAuthentication();
-  console.log("dashboard_authval: ", val);
-  if (val != false) {
-    redirect("/");
-  }
-
-
   
-  
-
-  // Session Authentication
-  const session = await getServerSession(AuthOptions);
-  console.log(session);
-
   return (
     <>
       <div className="hidden h-full flex-col md:flex">

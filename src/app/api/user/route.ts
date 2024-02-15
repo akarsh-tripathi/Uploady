@@ -1,5 +1,4 @@
 import { db } from "@/lib/db";
-import { isPageStatic } from "next/dist/build/utils";
 import { NextResponse } from "next/server";
 import { hash } from "bcrypt";
 import { z } from "zod";

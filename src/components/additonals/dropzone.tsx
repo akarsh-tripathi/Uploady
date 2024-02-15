@@ -9,11 +9,9 @@ import { getServerSession } from "next-auth";
 import { AuthOptions } from "@/lib/auth";
 import { useSession } from "next-auth/react";
 
-
-
 const dropzone = () => {
-  const {data:session} = useSession();
-  console.log("Yes this is me-",session);
+  const { data: session } = useSession();
+  console.log("Yes this is me-", session);
   const { toast } = useToast();
   const maxSize = 1048576;
 
@@ -61,13 +59,14 @@ const dropzone = () => {
           toast({
             title: "File Uploaded",
             description: "File has been uploaded successfully!",
-            action: (
-              <ToastAction altText="Goto schedule to undo">Undo</ToastAction>
-            ),
-          
-          })
+          });
         } else {
           console.log("ERROR");
+          toast({
+            variant: "destructive",
+            title: "File Uploading Failed",
+            description: "Kindly Upload Again",
+          });
         }
         console.log(data);
       } else {
@@ -78,7 +77,6 @@ const dropzone = () => {
 
   return (
     <>
-      
       <Dropzone minSize={0} maxSize={maxSize} maxFiles={10} onDrop={onDrop}>
         {({
           getRootProps,
@@ -108,16 +106,7 @@ const dropzone = () => {
                 {!isDragActive && "Click here or drop a file to upload"}
                 {isDragActive && !isDragReject && "Drop to upload this file!"}
                 {isDragReject && "File type not accepted, sorry!!"}
-                {isFileTooLarge && (
-                  <div>
-                    toast( title: "Scheduled: Catch up ", description: "Friday,
-                    February 10, 2023 at 5:57 PM", action: (
-                    <ToastAction altText="Goto schedule to undo">
-                      Undo
-                    </ToastAction>
-                    ), )
-                  </div>
-                )}
+                {isFileTooLarge && "File is too large! Should be less than 20MB"}
               </div>
             </section>
           );
@@ -127,7 +116,6 @@ const dropzone = () => {
         <p>Drag & Drop your file to get uploaded! No need to click anywhere!</p>
       </div>
       {/* <FileSuccess/> */}
-      
     </>
   );
 };
