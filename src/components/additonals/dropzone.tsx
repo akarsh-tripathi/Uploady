@@ -1,32 +1,33 @@
 "use client";
 import { cn } from "@/lib/utils";
-import React from "react";
+import React, { use, useState } from "react";
 import Dropzone from "react-dropzone";
 import { useToast } from "../ui/use-toast";
 import { ToastAction } from "../ui/toast";
 import { supabase } from "@/lib/supabase";
-import { Button } from "../ui/button";
+import { getServerSession } from "next-auth";
+import { AuthOptions } from "@/lib/auth";
 import { useSession } from "next-auth/react";
 
+
+
 const dropzone = () => {
-  
+  const {data:session} = useSession();
+  console.log("Yes this is me-",session);
   const { toast } = useToast();
   const maxSize = 1048576;
 
   const onDrop = (acceptedFile: File[]) => {
-    
     acceptedFile.forEach((file) => {
-        console.log(file);
+      console.log(file);
       const reader = new FileReader();
-      
+
       reader.onabort = () => {
         toast({
           title: "Scheduled: Catch up",
           description: "Friday, February 10, 2023 at 5:57 PM",
           action: (
-            <ToastAction altText="Goto schedule to undo">
-              Undo
-            </ToastAction>
+            <ToastAction altText="Goto schedule to undo">Undo</ToastAction>
           ),
         });
       };
@@ -39,34 +40,32 @@ const dropzone = () => {
     });
 
     const uploadFile = async (selectedFile: File) => {
-        const { data, error } = await supabase.storage
-            .from("UploadedFiles")
-            .upload("public/" + selectedFile.name, selectedFile as File);
-         
-        if (data) {
-            const response = await fetch("api/fileupload", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  filename: selectedFile.name,
-                  url: data.path,
-                  userId: 'adojojoiadd',
-                }),
-            });
-            if(response.ok){
-                console.log("Updated to Database as well!")
-            }else{
-                console.log("ERROR")
-            }
-        console.log(data);
-        } else {
-            console.log(data);
-        }
-    };
-        
+      const { data, error } = await supabase.storage
+        .from("UploadedFiles")
+        .upload("public/" + selectedFile.name, selectedFile as File);
 
+      if (data) {
+        const response = await fetch("api/fileupload", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            filename: selectedFile.name,
+            url: data.path,
+            userId: session?.user.username,
+          }),
+        });
+        if (response.ok) {
+          console.log("Updated to Database as well!");
+        } else {
+          console.log("ERROR");
+        }
+        console.log(data);
+      } else {
+        console.log(data);
+      }
+    };
   };
 
   return (
@@ -78,7 +77,7 @@ const dropzone = () => {
           isDragActive,
           isDragReject,
           fileRejections,
-          isDragAccept
+          isDragAccept,
         }) => {
           const isFileTooLarge =
             fileRejections.length > 0 && fileRejections[0].file.size > maxSize;
@@ -87,14 +86,13 @@ const dropzone = () => {
               <div
                 {...getRootProps()}
                 className={cn(
-                  "w-full h-52 flex justify-center items-center p-5 border border-dashed rounded-lg text-center",
+                  "w-full h-80 flex justify-center items-center p-5 border border-dashed rounded-lg text-center",
                   isDragActive
                     ? "bg-[#035ffe] text-white animate-pulse"
                     : "bg-slate-100/50 dark:bg-slate=800/80 text-slate-400",
-                    isDragAccept
+                  isDragAccept
                     ? "bg-green text-white animate-pulse"
                     : "bg-slate-100/50 dark:bg-slate=800/80 text-slate-400"
-                
                 )}
               >
                 <input {...getInputProps()} />
@@ -117,14 +115,10 @@ const dropzone = () => {
         }}
       </Dropzone>
       <div className="flex items-center space-x-2">
-        <p>
-            Drag & Drop your file to get uploaded! No need to click anywhere! 
-        </p>
+        <p>Drag & Drop your file to get uploaded! No need to click anywhere!</p>
       </div>
-      {/* <div className="flex items-center space-x-2">
-                  <Button onClick={}>Upload</Button>
-                  <Button variant="secondary">Share</Button>
-        </div> */}
+      {/* <FileSuccess/> */}
+      
     </>
   );
 };
