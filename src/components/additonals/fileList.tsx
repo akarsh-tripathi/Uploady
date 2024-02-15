@@ -1,34 +1,56 @@
 'use client'
-import { prisma } from '@/lib/db';
-import React, { FC } from 'react'
+import { useState, useEffect, FC } from 'react';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { useSession } from 'next-auth/react';
 
-
-const FileListMap: ({id,filename,url,userId,createdAt,updatedAt}) => {
-      
-  return (
-    <>
-        {/* The Function of Card Format */}
-        <ul>
-        {Files.map((file) => (
-            <li key={file.id}>
-            <Card className="width:300">
-                <CardHeader>
-                <CardTitle>{file.filename}</CardTitle>
-                <CardDescription>{file.userId}</CardDescription>
-                </CardHeader>
-                <CardFooter className="text-10">
-                <p>{file.createdAt.toLocaleDateString()}</p>
-                </CardFooter>
-            </Card>
-            <div className="space-y-4">
-            </div>
-            </li>
-        ))}
-        </ul>
-    </>
-  )
+interface Document {
+  id: number;
+  filename: string;
+  url: string;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-export default FileListMap
+const FileListMap: FC = () => {
+  const [docfiles, setDocFiles] = useState<Document[]>([]); // Provide initial state as an empty array
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    const fetchDocs = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCALURL}/api/getDocuments`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch documents');
+        }
+        const files = await response.json();
+        setDocFiles(files);
+      } catch (error) {
+        console.error('Error fetching documents:', error);
+      }
+    };
+    fetchDocs();
+  }, []);
+
+  return (
+    <>
+      <ul className="space-y-4">
+        {docfiles.map((file: Document) => (
+          <li key={file.id}>
+            <Card className="width:300">
+              <CardHeader>
+                <CardTitle>{file.filename}</CardTitle>
+                <CardDescription>{file.userId}</CardDescription>
+              </CardHeader>
+              <CardFooter className="text-10">
+                <p>{file.createdAt.toLocaleDateString()}</p>
+              </CardFooter>
+            </Card>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+export default FileListMap;

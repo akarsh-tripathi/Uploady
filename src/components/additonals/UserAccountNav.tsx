@@ -27,7 +27,7 @@ import { signOut, useSession } from "next-auth/react";
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
             <Avatar className="h-8 w-8">
               <AvatarImage src="/avatars/01.png" alt="@shadcn" />
-              <AvatarFallback>AT</AvatarFallback>
+              <AvatarFallback>{getInitials(session?.user.name??'AT')}</AvatarFallback>
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
@@ -55,3 +55,10 @@ import { signOut, useSession } from "next-auth/react";
       </DropdownMenu>
     )
   }
+
+  function getInitials(fullName: string): string {
+    const [firstName, lastName] = fullName.split(' ');
+    const firstInitial = firstName.charAt(0).toUpperCase();
+    const lastInitial = lastName ? lastName.charAt(0).toUpperCase() : ''; // Handle cases where last name might be missing
+    return `${firstInitial}${lastInitial}`;
+}
