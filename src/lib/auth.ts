@@ -3,7 +3,6 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { db } from "./db";
 import bcrypt from "bcrypt";
-import { callbackify } from "util";
 
 
 export const AuthOptions:NextAuthOptions ={
