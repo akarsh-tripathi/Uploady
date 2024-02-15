@@ -19,7 +19,10 @@ const FileListMap: FC = () => {
   useEffect(() => {
     const fetchDocs = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCALURL}/api/getDocuments`);
+        //const url = process.env.NEXT_PUBLIC_LOCAL_URLL+'/api/getDocuments';
+        const url = 'http://localhost:3000/api/getDocuments';
+        console.log(url);
+        const response = await fetch(url);
         if (!response.ok) {
           throw new Error('Failed to fetch documents');
         }
@@ -30,10 +33,12 @@ const FileListMap: FC = () => {
       }
     };
     fetchDocs();
-  }, []);
+  });
+  
+
 
   return (
-    <>
+    <div>
       <ul className="space-y-4">
         {docfiles.map((file: Document) => (
           <li key={file.id}>
@@ -43,13 +48,13 @@ const FileListMap: FC = () => {
                 <CardDescription>{file.userId}</CardDescription>
               </CardHeader>
               <CardFooter className="text-10">
-                <p>{file.createdAt.toLocaleDateString()}</p>
+                <p>{new Date(file.createdAt).toDateString() }</p>
               </CardFooter>
             </Card>
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 }
 

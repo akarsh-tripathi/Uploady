@@ -58,6 +58,14 @@ const dropzone = () => {
         });
         if (response.ok) {
           console.log("Updated to Database as well!");
+          toast({
+            title: "File Uploaded",
+            description: "File has been uploaded successfully!",
+            action: (
+              <ToastAction altText="Goto schedule to undo">Undo</ToastAction>
+            ),
+          
+          })
         } else {
           console.log("ERROR");
         }
@@ -70,6 +78,7 @@ const dropzone = () => {
 
   return (
     <>
+      
       <Dropzone minSize={0} maxSize={maxSize} maxFiles={10} onDrop={onDrop}>
         {({
           getRootProps,
