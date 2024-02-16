@@ -26,6 +26,14 @@ Uploady support files that can be shared with others using Supabase Storage as B
 
 ![Screen Shot](src/imgsrc/documentuploaded.jpg)
 
+## Running locally in development mode
+
+To get started, just clone the repository and run `npm install && npm run dev`:
+
+    git clone https://github.com/akarsh-tripathi/upload_nextjs
+    npm install
+    npx prisma generate && npm run dev
+
 ## Built With
 
 The Software was built on top of 
