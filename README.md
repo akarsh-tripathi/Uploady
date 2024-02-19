@@ -1,6 +1,6 @@
 <br/>
 <p align="center">
-  <h3 align="center">Uploady (Blinkit)</h3>
+  <h3 align="center">Uploady</h3>
 <!-- ![Screen Shot](images/kisaanpro.png) -->
 <img src="src/imgsrc/dashboard.jpg"/>
 
